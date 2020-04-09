@@ -10,7 +10,13 @@ Learning from :
 	[Referesnce list]()
 <hr>
 
-### Day 1 :
+<details><summary>
+
+***Day 1 :***
+
+</summary><br>
+
+
 1. complete till ***Section 3*** :<br>
 	***Section 1 *** : **Introduction**  || *completed* <br>
 	***Section 2 *** : **Python Fundamentals** || *completed* <br>
@@ -39,6 +45,7 @@ Learning from :
 		6.Encoding is the process of converting data into a particular format (such as the utf-8 format). For example, encoding a string in utf-8, would produce the equivalent byte string in utf-8 characters. Decoding converts the encoded data back into its original form.
 
 		7.A lambda in python is a function that can be declared inline. In the project so far, we've used it for the map() method which can transform a list into a new list. The map function's first parameter is a lambda, which defines how to transform each item in the original list to produce the new list. 
+</details>
 
 	**Block.py**
 	
@@ -58,7 +65,7 @@ Learning from :
 		class Blockchain :
 		    def __init__(self):
 		        self.chain = [Block.genesis()]
-		        
+
 		    def add_block(self,data) :
 		        self.chain.append(Block( self.chain[len(self.chain)-1].hash , data))
 
