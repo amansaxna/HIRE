@@ -11,16 +11,16 @@ Learning from :
 <hr>
 
 ### Day 1 :
-1. complete till ***Section 3***
-	***Section 1 *** : **Introduction**  || *completed*
-	***Section 2 *** : **Python Fundamentals** || *completed*
-	***Section 3 *** : **Start the Blockchain Application** || *in-completed*
-		1. **Lecture 16.** The Blockchain and Block class :
-				```command line
-					$ mkdir HIRE
-					$ touch blockchain.py
-					$ touch block.py
-				``` 
+1. complete till ***Section 3*** :<br>
+	***Section 1 *** : **Introduction**  || *completed* <br>
+	***Section 2 *** : **Python Fundamentals** || *completed* <br>
+	***Section 3 *** : **Start the Blockchain Application** || *in-completed* <br>
+	1. **Lecture 16.** The Blockchain and Block class :
+				```console
+				$ mkdir HIRE
+				$ touch blockchain.py
+				$ touch block.py
+				``` <br>
 				note: 
 					keep the documentations upto date ( use docstring [comment vs docstring](https://stackoverflow.com/questions/19074745/docstrings-vs-comments) )
 
@@ -40,27 +40,27 @@ Learning from :
 
 		7.A lambda in python is a function that can be declared inline. In the project so far, we've used it for the map() method which can transform a list into a new list. The map function's first parameter is a lambda, which defines how to transform each item in the original list to produce the new list. 
 
-		### Block.py
-		```python
-			class Block :
+	**Block.py**
+	
+	```python
+		class Block :
 		    def __init__(self, last_hash, data):
 		        self.timestamp = self.set_timestamp()
 		        self.last_hash = last_hash  
 		        self.data = data  
 		        self.hash = self.get_hash()  
 		        self.__repr__()
+	```
+		
+	**Blockchain.py**
 
-		```
-
-		### Blockchain.py
-
-		```python
+	```python
 		class Blockchain :
 		    def __init__(self):
 		        self.chain = [Block.genesis()]
-
+		        
 		    def add_block(self,data) :
 		        self.chain.append(Block( self.chain[len(self.chain)-1].hash , data))
 
-		```
+	```
                  
