@@ -2,6 +2,11 @@ import datetime
 import hashlib
 import json
 
+GENESIS_DATA = {
+    'last_hash': 0 ,
+    'data':'genesis' 
+     }
+
 class Block :
     """
     Block : a unit storage.
@@ -20,8 +25,9 @@ class Block :
 # generic method using static decorator
     @staticmethod
     def genesis() :
-        return Block( "0" , "generic")
-    
+        #return Block( "0" , "genesis")
+        return Block(**GENESIS_DATA)
+
 #Generating timestamp
     def get_timestamp(self):
         time =  datetime.datetime.now()

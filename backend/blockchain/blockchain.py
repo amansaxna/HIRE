@@ -1,4 +1,4 @@
-from block import Block
+from backend.blockchain.block import Block
 import datetime
 
 class Blockchain :
