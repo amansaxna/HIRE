@@ -12,7 +12,7 @@ Learning from :
 Important Dependencies: [See requrement.txt]
 1. pyhton 3 (Python 3.8.0)
 2. pip (pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)
-3. sudo apt-get install python-virtualenv
+3. sudo pip3 install virtualenv
 <hr>
 
 <details><summary>Day 1 :</summary><br>
@@ -96,7 +96,8 @@ class Block :
   	1. create a ***virtual envirnment*** for the current project
         ```bash
         python3 -m venv blockchain-env
-
+		!or
+		virtualenv -p python3 HIRE-env
         ```
 
         this will create avirtual evnv.
@@ -107,35 +108,35 @@ class Block :
     2. Start the blockchain-env:
     	```console
     	$	source blockchian-env/bin/activate
+		!or
+		. HIRE-env/bin/activate
+
     	```
 		[ERROR-Window] 
     	TO CHECK whether you are in the virtual env use::
     	```CONSOLE
     	$	echo $VIRTUAL_ENV
     	``` this will print the path
-    3. Install pytest (5.1.2)
-    	```
-    	$	pip3 install pytest==5.1.2
-    	``` 
-    4. Automate the dependency donload using **requirement.txt**
-    5. execute the package using ::
+3. Install pytest (5.1.2)
+```
+$	pip3 install pytest==5.1.2
+``` 
+4. Automate the dependency donload using **requirement.txt**
+5. execute the package using ::
+```bash
+!this will call the module backend then blockchian
+python3 -m backend.blockchain.blockchain
+```
 
-	```bash
+6. create a tests file --> test_block.py , test_blockchain.py
 
-	!this will call the module backend then blockchian
-	python3 -m backend.blockchain.blockchain
-	
-	```
+7. run the tests
 
-	6. create a tests file --> test_block.py , test_blockchain.py
+```bash
 
-	7. run the tests
+python3 -m pytest backend/tests
 
-	```bash
-
-	python3 -m pytest backend/tests
-
-	```
+```
 
 **Hilights :**
 
@@ -144,6 +145,7 @@ class Block :
 3. The general approach to tests is to create a series of assert statements that verify whether or not a value is equal to some other value.
 
 </details>
+
 
 ### SECTION 5 :
 
@@ -154,6 +156,58 @@ class Block :
 
 
 </details>
+
+
+### blockchain network
+
+<details><summary>6:</summary><br>
+1. set up flask::
+```bash
+
+pip3 install Flask==1.1.1
+# to check every present modules on the v-env
+```bash
+pip3 freeze
+
+```
+Add "Flask==1.1.1" in requiements.txt
+
+to run flask (in development mode):
+```bash
+
+export FLASK_ENV=development
+python3 -m backend.app
+
+```
+development mode allows the server to restart whenever there is a change in the code
+
+2. Set up PUBNUB
+***https://www.pubnub.com/developers/tech/key-concepts/publish-subscribe/**
+**https://www.pubnub.com/docs/python/api-reference-configuration**
+
+1. create a new app over the website https://www.pubnub.com/
+
+2. install pubnub
+```bash
+pip3 install pubnub==4.1.6
+```
+update the requirements
+
+3. to set envirnment variable on the bash
+```
+export PEER = True && python3 -m backend.app
+#try set as a replacement on windows 10
+#to run the pubsub
+pyhton3 -m backend.pubsub
+```
+https://superuser.com/questions/1500272/equivalent-of-export-command-in-windows
+
+4.	install requests -> Synchronize a peer at startup
+```bash
+pip3 install requests==2.22.0
+```
+
+
 
 ## test_block.py 
 
@@ -215,4 +269,17 @@ Make sure to activate the virtual environment.
 
 pyhton3 -m pytest backend/test
 
+```
+### Run the application and the API
+
+```bash
+
+pyhton3 -m backend.app
+
+```
+
+### Run a peer instance
+
+```bash
+export PEER = True && python3 -m backend.app
 ```

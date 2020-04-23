@@ -1,5 +1,4 @@
 import time
-import datetime
 
 from backend.util.crypto_hash import crypto_hash
 from backend.util.hex_to_binary import hex_to_binary
@@ -30,22 +29,16 @@ class Block:
     def __repr__(self):
         return (
             'Block('
-            f'timestamp: {self.timestamp}, \n'
-            f'last_hash: {self.last_hash}, \n'
-            f'hash: {self.hash}, \n'
-            f'data: {self.data}, \n'
-            f'difficulty: {self.difficulty}, \n'
-            f'nonce: {self.nonce})\n'
+            f'timestamp: {self.timestamp}, '
+            f'last_hash: {self.last_hash}, '
+            f'hash: {self.hash}, '
+            f'data: {self.data}, '
+            f'difficulty: {self.difficulty}, '
+            f'nonce: {self.nonce})'
         )
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
-
-    def to_json(self):
-        """ 
-        Serialize the block into a dictionary of attributes.
-        """
-        return self.__dict__
 
     @staticmethod
     def mine_block(last_block, data):
@@ -53,7 +46,7 @@ class Block:
         Mine a block based on the given last_block and data, until a block hash
         is found that meets the leading 0's proof of work requirement.
         """
-        timestamp = time.time()
+        timestamp = time.time_ns()
         last_hash = last_block.hash
         difficulty = Block.adjust_difficulty(last_block, timestamp)
         nonce = 0
@@ -61,7 +54,7 @@ class Block:
 
         while hex_to_binary(hash)[0:difficulty] != '0' * difficulty:
             nonce += 1
-            timestamp = time.time()
+            timestamp = time.time_ns()
             difficulty = Block.adjust_difficulty(last_block, timestamp)
             hash = crypto_hash(timestamp, last_hash, data, difficulty, nonce)
 
@@ -73,14 +66,6 @@ class Block:
         Generate the genesis block.
         """
         return Block(**GENESIS_DATA)
-
-    @staticmethod
-    def from_json(block_json):
-        """
-        Deserialize a block's json format back into a  bloack instance
-        """
-        return Block(**block_json)
-
 
     @staticmethod
     def adjust_difficulty(last_block, new_timestamp):
