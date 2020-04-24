@@ -8,6 +8,8 @@ Learning from :
 	[cheat sheet link](https://www.udemy.com/course/python-js-react-blockchain/learn/lecture/16601462#overview)
 3. Git link :
 	[Referesnce list]()
+4. pubnub link:
+	https://www.pubnub.com/docs/python/api-reference-publish-and-subscribe
 
 Important Dependencies: [See requrement.txt]
 1. pyhton 3 (Python 3.8.0)
@@ -32,15 +34,15 @@ Important Dependencies: [See requrement.txt]
 					keep the documentations upto date ( use docstring [comment vs docstring](https://stackoverflow.com/questions/19074745/docstrings-vs-comments) )
 
 **Highlight:**
-1. The blockchain is list of blocks where each block represents a unit of storage for data. The list is called a chain because each block references the block before it, creating (chain) links between between blocks. In a blockchain that supports a cryptocurrency, blocks store transactions.
-2. A python module is a file that contains various Python definitions and statements. For example, the block.py file serves as the block module for the project. The __name__ value in Python reflects the name of the module it's used within, except when the file is directly executed. When a file is directly executed the __name__ value becomes '__main__'.
-3. Mining blocks refers to the process of running a computationally expensive algorithm in order to create new blocks for the blockchain. We'll expand on this in the section on Proof of Work.
-4. The genesis block is the first block in the blockchain. Since all blocks must reference the block that came before it, the genesis block serves as a hardcoded starter block for the chain.
-5. A hashing algorithm generates a unique output for every unique output. In the case of this project, we're using the sha-256 algorithm, which produces a unique 256 character hash in binary, and a 64 character hash in hexadecimal.
-6. Encoding is the process of converting data into a particular format (such as the utf-8 format). For example, encoding a string in utf-8, would produce the equivalent byte string in utf-8 characters. Decoding converts the encoded data back into its original form.
-7. A lambda in python is a function that can be declared inline. In the project so far, we've used it for the map() method which can transform a list into a new list. The map function's first parameter is a lambda, which defines how to transform each item in the original list to produce the new list. 
+	1. The blockchain is list of blocks where each block represents a unit of storage for data. The list is called a chain because each block references the block before it, creating (chain) links between between blocks. In a blockchain that supports a cryptocurrency, blocks store transactions.
+	2. A python module is a file that contains various Python definitions and statements. For example, the block.py file serves as the block module for the project. The __name__ value in Python reflects the name of the module it's used within, except when the file is directly executed. When a file is directly executed the __name__ value becomes '__main__'.
+	3. Mining blocks refers to the process of running a computationally expensive algorithm in order to create new blocks for the blockchain. We'll expand on this in the section on Proof of Work.
+	4. The genesis block is the first block in the blockchain. Since all blocks must reference the block that came before it, the genesis block serves as a hardcoded starter block for the chain.
+	5. A hashing algorithm generates a unique output for every unique output. In the case of this project, we're using the sha-256 algorithm, which produces a unique 256 character hash in binary, and a 64 character hash in hexadecimal.
+	6. Encoding is the process of converting data into a particular format (such as the utf-8 format). For example, encoding a string in utf-8, would produce the equivalent byte string in utf-8 characters. Decoding converts the encoded data back into its original form.
+	7. A lambda in python is a function that can be declared inline. In the project so far, we've used it for the map() method which can transform a list into a new list. The map function's first parameter is a lambda, which defines how to transform each item in the original list to produce the new list. 
 
-
+</details>
 **Block.py**
 
 ```python
@@ -71,10 +73,7 @@ class Block :
 		        self.chain.append(Block( self.chain[len(self.chain)-1].hash , data))
 
 ```
-                 
-</details>
-
-
+                
 <details><summary>Day 2 :</summary><br>
 	
 1. complete till ***Section 6*** :<br>
@@ -210,15 +209,15 @@ pip3 install requests==2.22.0
 **Summary**
 	An API, or Application Programming Interface is a medium that allows external parties to call code within an existing system.
 
-HTTP stands for hypertext transfer protocol - and http allows allows you to fetch resources over the web. For example, a GET http request is associated with reading data from an API. A POST http request is associated with sending data to the API.
+	HTTP stands for hypertext transfer protocol - and http allows allows you to fetch resources over the web. For example, a GET http request is associated with reading data from an API. A POST http request is associated with sending data to the API.
 
-Flask is a widely used python module that helps build web servers.
+	Flask is a widely used python module that helps build web servers.
 
-JSON, which stands for JavaScript Object Notation, is a format for structuring data that is commonly used for sharing objects over the web. Even though the name includes JavaScript, it's actually supported by multiple languages. This makes it a great format to use for sending objects across applications - for example, from a backend server, to a frontend web application.
+	JSON, which stands for JavaScript Object Notation, is a format for structuring data that is commonly used for sharing objects over the web. Even though the name includes JavaScript, it's actually supported by multiple languages. This makes it a great format to use for sending objects across applications - for example, from a backend server, to a frontend web application.
 
-The publisher/subscriber pattern, or pub/sub for short, is a networking pattern that exposes various communication channels. Publishers broadcast messages on those channels. And subscribers receive messages on those channels.
+	The publisher/subscriber pattern, or pub/sub for short, is a networking pattern that exposes various communication channels. Publishers broadcast messages on those channels. And subscribers receive messages on those channels.
 
-Serialization is the process of converting a complex custom object into a simpler format that can be shared across the web, or perhaps stored in a database more easily. Most often, the end result of serialization is a string representation of the original object. Deserialization would then take the string representation, and convert it back to the complex custom object.
+	Serialization is the process of converting a complex custom object into a simpler format that can be shared across the web, or perhaps stored in a database more easily. Most often, the end result of serialization is a string representation of the original object. Deserialization would then take the string representation, and convert it back to the complex custom object.
 
 
 </details>
@@ -269,6 +268,47 @@ python3 -m backend.wallet.transaction
 
 	Validating transactions involves checking that the total currency sent to the recipients is correct, and that the signature is correct according to the presented public key and transaction output.
 </details>
+
+<details><summary>9:Transactions on the network</summary><br>
+
+**GOALS**
+1. Create an API method that will allow the application owner to create transaction
+2. And also, these transactions shouls be published in the network(serialize and deserialize the transactions)
+
+#### Steps
+
+1. Download postman :: use chrome pugin
+2. create a POST request method for transactions
+
+```bash
+@app.route('/wallet/transact',methods= ['post'])
+#{'recipient' :'foo', 'amount' :15}
+```
+3. restructure the wallet object to json format
+4. USE POSTMAN ::
+	1. POST :: http://127.0.0.1:5000/wallet/transact
+	2. set Body -> SELECT RAW -> Select json
+	3. set POST data -> 
+
+```json
+{
+	"recipient": "foo",
+	"amount": 15
+}
+```
+	4. send
+<br>
+
+5. **transaction pool**
+Collects all the transaction created in the network
+should do ::
+
+1. unique set of transaction object
+2. update existing stored transaction when there is an update
+3. Rewrite multiple transaction
+	
+6. broadcast the pool
+
 
 ## test_block.py 
 
