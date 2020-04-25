@@ -93,11 +93,11 @@ class Block :
 
   Steps::
   	1. create a ***virtual envirnment*** for the current project
-        ```bash
-        python3 -m venv blockchain-env
-		!or
-		virtualenv -p python3 HIRE-env
-        ```
+```bash
+python3 -m venv blockchain-env
+!or
+virtualenv -p python3 HIRE-env
+```
 
         this will create avirtual evnv.
         NOTE::
@@ -309,6 +309,62 @@ should do ::
 	
 6. broadcast the pool
 
+**SUMMARY**
+	The new /wallet/transact endpoint is the first POST request of the API. A POST request allows the requester to send data to the application, for methods that usually create new objects.
+
+	Serializing the wallet's public key took a more complex approach since the public key byte string is not in the utf-8 encoding. Instead, the public key's default format is in an encoding format called PEM, that's defined within the cryptography module. But by encoding and decoding the public key using this format, a public key can be shared across the network, and restored back into a rich public key object when it comes to validating signatures.
+
+	The transaction pool is an object that collects transactions that have been broadcasted across the network. It stores transactions according to their id. The idea is that this transaction pool will collect the transactions that miners will use as the basis of data for new blocks.
+
+	Truthy values in Python act like True when placed in a boolean context. Any value that is not falsy (values that like False in a boolean context) is truthy. So it's important to know what values are falsy: None, 0, the empty string, or any empty collection, like an empty list or dictionary.
+</details>
+
+<details><summary>10:Connecting modules</summary><br>
+Connect the Blockchain and Cryptocurrency
+
+1. Mine Transaction
+2. Wallet Balance
+3. Mining Reward
+
+python3 -m backend.scripts.test_app
+
+</detail>
+
+### FRONTEND :
+1. REACT JS
+2. REACT HOOK
+
+Install
+1. nodejs(v12.14.0) ::  https://nodejs.org/en/download/
+2. npm(6.13.4)
+3. npx(6.13.4)
+
+**Steps** :<br>
+1. Initialize react app
+```bash
+
+npx create-react-app frontend
+```
+2. update the .html and .css files
+3. start the app
+```bash
+HIRE/frontend$ npm run start
+```
+3. set CORS polocies{important}to allow the access
+	a. Way 1:
+ 		https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc?hl=en
+		Easily add (Access-Control-Allow-Origin: *) rule to the response header.
+		Allow CORS: Access-Control-Allow-Origin lets you easily perform cross-domain Ajax requests in web applications.
+
+		Simply activate the add-on and perform the request. CORS or Cross Origin Resource Sharing is blocked in modern browsers by default (in JavaScript APIs). Installing this add-on will allow you to unblock this feature. Please note that, when the add-on is added to your browser, it is in-active by default (toolbar icon is grey C letter). If you want to activate the add-on, please press on the toolbar icon once. The icon will turn to orange C letter.
+
+	b. way 2:
+	Install Flask-Cors
+```bash
+pip3 install Flask-Cors==3.0.8
+``` 
+
+<details><summary>10:Connecting modules</summary><br>
 
 ## test_block.py 
 
@@ -384,3 +440,10 @@ pyhton3 -m backend.app
 ```bash
 export PEER = True && python3 -m backend.app
 ```
+
+### Run a front end
+
+```bash
+HIRE/frontend$ npm run start
+```
+https://github.com/gatsbyjs/gatsby/issues/11406

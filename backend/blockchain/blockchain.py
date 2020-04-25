@@ -26,7 +26,7 @@ class Blockchain:
         try:
             Blockchain.is_valid_chain(chain)
         except Exception as e:
-            raise Exception(f'Cannot replace. The incoming chain is invalid: {e}')
+            raise Exception(f'Cannot replace. The incoming chain is invalid: {e} ')
 
         self.chain = chain
 

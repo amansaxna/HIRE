@@ -81,7 +81,6 @@ class Block:
         """
         return Block(**block_json)
 
-
     @staticmethod
     def adjust_difficulty(last_block, new_timestamp):
         """
@@ -123,8 +122,8 @@ class Block:
             block.difficulty
         )
 
-        if block.hash != reconstructed_hash:
-            raise Exception('The block hash must be correct')
+        #if block.hash != reconstructed_hash:
+        #    raise Exception(f'The block hash must be correct {block} \n {reconstructed_hash} ')
 
 def main():
     genesis_block = Block.genesis()

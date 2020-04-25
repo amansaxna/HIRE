@@ -65,8 +65,7 @@ class Wallet:
 
         #print(f'\n signature : {signature}\n')
         (r,s) = signature
-
-
+        
         try:
             deserialized_public_key.verify(
                 encode_dss_signature(r,s),
